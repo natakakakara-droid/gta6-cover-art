@@ -1,0 +1,166 @@
+/* Vice Cover Studio — editor UI. Anton is the cover typeface; the editor
+   itself uses the system font stack. */
+@font-face {
+  font-family: 'Anton';
+  src: url('./fonts/Anton-Regular.ttf') format('truetype');
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+
+* { box-sizing: border-box; }
+
+body {
+  margin: 0;
+  background: #12081f;
+  color: #f5eefc;
+  font-family: system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif;
+  font-size: 15px;
+  line-height: 1.45;
+}
+
+.topbar {
+  padding: 18px 24px 10px;
+  border-bottom: 1px solid #2c1745;
+  background: linear-gradient(90deg, #1a0b2e, #3d1155 55%, #7b1e5b);
+}
+
+.topbar h1 {
+  margin: 0;
+  font-family: Anton, 'Arial Narrow', sans-serif;
+  font-size: 34px;
+  letter-spacing: 1px;
+  color: #fff;
+  text-shadow: 3px 3px 0 #ff5e62, 6px 6px 0 rgba(0, 0, 0, 0.35);
+}
+
+.topbar p { margin: 4px 0 0; color: #ffd9ec; }
+
+.app {
+  display: grid;
+  grid-template-columns: 340px minmax(0, 1fr);
+  gap: 20px;
+  padding: 20px 24px;
+  align-items: start;
+}
+
+.controls { display: flex; flex-direction: column; gap: 14px; }
+
+.group {
+  background: #1d0f31;
+  border: 1px solid #352052;
+  border-radius: 12px;
+  padding: 14px 16px;
+}
+
+.group h2 {
+  margin: 0 0 10px;
+  font-family: Anton, 'Arial Narrow', sans-serif;
+  font-size: 19px;
+  letter-spacing: 1px;
+  color: #ff9a3d;
+}
+
+.group label { display: block; margin: 8px 0; font-weight: 600; }
+.group label span { font-weight: 400; color: #cdb8e6; }
+
+input[type="text"], select {
+  display: block;
+  width: 100%;
+  margin-top: 4px;
+  padding: 8px 10px;
+  border-radius: 8px;
+  border: 1px solid #4a2d6e;
+  background: #12081f;
+  color: #fff;
+  font: inherit;
+}
+
+input[type="range"] { width: 100%; accent-color: #ff5e62; }
+
+.file-label {
+  display: block;
+  padding: 10px 12px;
+  border: 1px dashed #7b5cff;
+  border-radius: 8px;
+  text-align: center;
+  cursor: pointer;
+}
+.file-label input { display: none; }
+
+.row { display: flex; flex-wrap: wrap; gap: 8px; margin: 8px 0; }
+
+button {
+  padding: 8px 12px;
+  border-radius: 8px;
+  border: 1px solid #4a2d6e;
+  background: #2a1845;
+  color: #fff;
+  font: inherit;
+  cursor: pointer;
+}
+button:hover { border-color: #ff5e62; }
+button.active { background: #ff5e62; border-color: #ff5e62; color: #fff; }
+button.primary {
+  width: 100%;
+  margin-top: 6px;
+  background: linear-gradient(90deg, #ff5e62, #ff9a3d);
+  border: none;
+  font-weight: 700;
+}
+#export-all { width: 100%; margin-top: 8px; }
+#panel-reset { margin-top: 4px; }
+
+.slots { list-style: none; margin: 8px 0 0; padding: 0; }
+.slots li {
+  padding: 6px 8px;
+  border-radius: 6px;
+  background: #160a26;
+  color: #9d8ab5;
+  margin-bottom: 4px;
+}
+.slots li.loaded { color: #b8f3d0; }
+
+.note { color: #b9a5cf; font-size: 13px; margin: 8px 0 0; }
+.check { font-weight: 400; }
+#status { min-height: 1.4em; color: #b8f3d0; font-weight: 600; }
+
+.stage { position: sticky; top: 16px; }
+#preview {
+  display: block;
+  width: 100%;
+  height: auto;
+  border-radius: 12px;
+  border: 1px solid #352052;
+  background: #000;
+  cursor: grab;
+  touch-action: none;
+}
+#preview:active { cursor: grabbing; }
+
+.foot {
+  padding: 12px 24px 24px;
+  color: #8d7aa8;
+  font-size: 13px;
+}
+
+/* Deterministic cover shot: hide the editor, show only the cover. */
+body.shot-cover .topbar,
+body.shot-cover .controls,
+body.shot-cover .foot,
+body.shot-cover .stage .note { display: none; }
+body.shot-cover .app { display: block; padding: 0; }
+body.shot-cover .stage { position: static; }
+body.shot-cover #preview {
+  width: 100vw;
+  height: 100vh;
+  object-fit: contain;
+  border: 0;
+  border-radius: 0;
+  background: #000;
+}
+
+@media (max-width: 900px) {
+  .app { grid-template-columns: 1fr; }
+  .stage { position: static; }
+}
